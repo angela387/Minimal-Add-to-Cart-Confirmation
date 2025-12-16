@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Minimal Add to Cart Confirmation</title>
+<style>
+  :root{--bg:#070a10;--text:#eef2ff;--muted:rgba(238,242,255,.72);--border:rgba(255,255,255,.10);--y:#FFD100;--b:#3b82f6;}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:
+    radial-gradient(1100px 700px at 12% 10%, rgba(59,130,246,.18), transparent 60%),
+    radial-gradient(900px 600px at 88% 20%, rgba(255,209,0,.10), transparent 55%),
+    linear-gradient(180deg,#04060b,var(--bg));color:var(--text);font-family:system-ui,Segoe UI,Roboto,Arial}
+  .stage{width:min(820px,92vw);padding:28px;border-radius:26px;border:1px solid var(--border);
+    background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));box-shadow:0 30px 90px rgba(0,0,0,.55);backdrop-filter:blur(10px)}
+  h1{margin:0 0 6px;font-size:22px}
+  .sub{margin:0 0 16px;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800}
+  .row{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:22px;
+    border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.22);padding:22px}
+  .btn{appearance:none;border:0;background:linear-gradient(180deg,var(--y), rgba(255,209,0,.84));color:#0b0f17;
+    padding:14px 16px;border-radius:16px;cursor:pointer;font-weight:950;display:inline-flex;gap:10px;align-items:center}
+  .btn:active{transform:translateY(1px) scale(.99)}
+  .toast{
+    min-width:260px;
+    padding:12px 14px;
+    border-radius:16px;
+    background:rgba(59,130,246,.14);
+    border:1px solid rgba(59,130,246,.28);
+    color:rgba(238,242,255,.92);
+    font-weight:900;
+    display:flex; gap:10px; align-items:center;
+    opacity:0; transform: translateY(10px);
+  }
+  .toast.show{ animation: toastInOut 1800ms ease forwards; }
+  @keyframes toastInOut{
+    0%{opacity:0;transform:translateY(10px)}
+    20%{opacity:1;transform:translateY(0)}
+    75%{opacity:1;transform:translateY(0)}
+    100%{opacity:0;transform:translateY(8px)}
+  }
+  .check{
+    width:22px;height:22px;border-radius:999px;background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.14);display:grid;place-items:center;
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <h1>Minimal Add to Cart Confirmation</h1>
+    <div class="sub">E-commerce Animations • clean toast confirmation</div>
+
+    <div class="row">
+      <button class="btn" id="add">Add to Cart</button>
+
+      <div class="toast" id="toast" role="status" aria-live="polite">
+        <span class="check">✓</span>
+        Added to cart
+      </div>
+    </div>
+  </div>
+
+<script>
+  const add = document.getElementById('add');
+  const toast = document.getElementById('toast');
+
+  add.addEventListener('click', ()=>{
+    toast.classList.remove('show');
+    void toast.offsetWidth;
+    toast.classList.add('show');
+  });
+</script>
+</body>
+</html>
